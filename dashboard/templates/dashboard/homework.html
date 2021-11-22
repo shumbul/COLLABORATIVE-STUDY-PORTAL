@@ -1,0 +1,67 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    {% if not hw_done %}
+    <table class="table table-striped table-bordered table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hw in homeworks %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{hw.subject}}</td>
+                <td>{{hw.title}}</td>
+                <td>{{hw.desc}}</td>
+                <td>{{hw.due}}</td>
+
+                <td>
+                    <a href="{% url 'update_homework' hw.id %}">
+                        <div class="form-check">
+                            {% if hw.is_finished == True %}
+                            <input class="form-check-input" type="checkbox" value="" checked>
+                            {% else %}
+                            <input onclick = "{% url 'update_homework' hw.id %}" class="form-check-input" type="checkbox" value="" >
+                            {% endif %}
+                            <label class="form-check-label text-light" for="flexCheckDefault">
+                                Mark as Completed
+                            </label>
+                        </div>
+                    </a>
+                </td>
+                <!-- FOR DELETE OPERATION -->
+                <td><a href="{% url 'delete_homework' hw.id %}"><i class="fa fa-trash fa-2x"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4>All homeworks are completed!! Create to have more!!</h4>
+    {% endif %}
+</div>
+<div class=" container">
+    <form method="POST">
+      {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Homework</legend>
+            {{form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button href="" class="btn btn-outline-info" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

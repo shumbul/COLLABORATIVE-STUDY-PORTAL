@@ -1,0 +1,44 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container text-center">
+    <form method="POST">
+      {% csrf_token %}
+        <div class="form-group">
+          <legend class = "border-bottom mb-4"></legend>
+          {{form|crispy}}
+            <button href="" class="btn btn-outline-info" type="submit">
+                Select
+            </button>
+        </div>
+
+        {% if input %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4"></legend>
+              <div class="row">
+                  <div class ="col-md-4">
+                {{measureForm.input|as_crispy_field}}
+                </div>
+                <div class ="col-md-4">
+                {{measureForm.measure1|as_crispy_field}}
+              </div>
+                <div class ="col-md-4">
+                {{measureForm.measure2|as_crispy_field}}
+              </div>
+            </div>
+
+          </fieldset>
+          <fieldset class="form-group">
+              {{ans}}
+          </fieldset>
+          <div class="form-group">
+              <button href="" class="btn btn-outline-info" type="submit">
+                  Convert
+              </button>
+          </div>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock content %}

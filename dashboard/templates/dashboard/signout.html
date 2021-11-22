@@ -1,0 +1,12 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="border-top pt-3 text-center">
+  <h2>You are signed out</h2>
+
+  <small class="text-muted">
+    <a class="btn btn-danger" href="{% url 'signin' %}">Sign In Again</a>
+  </small>
+</div>
+{% endblock content %}
