@@ -10,23 +10,33 @@
         <div class="col-md-3">
             <a href="{% url 'notes_detail' note.id %}">
                 <div class="card">
-                    <!-- <div class="card-header">Title</div>
-                    <div class="card-body">Description</div> -->
-                    <!-- <div class="card-footer mt-auto "><a href="#"> -->
                     <div class="card-header">{{note.title}}</div>
                     <div class="card-body">{{note.desc}}</div>
                     <div class="card-footer mt-auto "><a href="{% url 'delete_note' note.id %}">
                         <i class="fa fa-trash fa-2x"></i></a>
                     </div>
                 </div>
+                <br>
+                    <form action="{% url 'shareNote' %}" method = "POST">
+                      {% csrf_token %}
+                      <label for="shared_user">Select a user</label>
+                      <select name="shared_user" id="shared_user">
+                        {% for user in all_users %}
+                        <option value={{user}}>{{user.username}}</option>
+                        {% endfor %}
+                      </select>
+                      <br><br>
+                      <input type="submit" value="Submit">
+                    </form>
             </a>
         </div>
         {% endfor %}
-
         <br><br>
 
     </div>
 </div>
+<br><br>
+<br><br>
 <br><br>
 <div class="container">
     <form method="POST">

@@ -20,6 +20,7 @@ class NotesDetailView(generic.DetailView):
 
 @login_required
 def notes(request):
+    print("USER: ", request.user)
     # this function is used to make notes while studying - update, delete, mark as done are it's functionalities
     if(request.method == "POST"):
         form = NoteDescForm(request.POST)
@@ -33,11 +34,13 @@ def notes(request):
         messages.success(request, f"Saved the notes from {request.user.username} successfully")
     else:
         form = NoteDescForm()
-    form = NoteDescForm()
     notes = Notes.objects.filter(user = request.user)
+    # print(" EXPT: request, notes: ", User.objects.all(), " ---> ", notes)
+    all_users = User.objects.all()
     context = {
                 'notes': notes,
                 'form': form,
+                'all_users' : all_users,
                 }
     return render(request, 'dashboard/notes.html', context)
 
@@ -45,6 +48,29 @@ def notes(request):
 def delete_note(request, primaryKey=None):
     # The note associated with this specific primary key (PK) will be delete
     Notes.objects.get(id = primaryKey).delete()
+    return redirect("notes")
+
+def shareNote(request):
+    # HOW to share note to another user's session?
+    # user=User.objects.get(username=username)
+    # shared_user = User.objects.get(id=userId)
+    # request.POST = request.POST.copy()
+    shared_user = request.POST['shared_user']
+    request.POST._mutable = True
+    request.POST.pop('shared_user')
+
+    form = NoteDescForm(request.POST)
+    print("FORM: ", form)
+    if(form.is_valid()):
+        print(" #########################EXPT: user: ", shared_user)
+        notes = Notes(
+                    title = request.POST['title'],
+                    user = shared_user,
+                    desc = request.POST['desc'],
+                    )
+        notes.save()
+        messages.success(request, f"Saved the notes to {shared_user} successfully")
+    # Notes.objects.get(id = primaryKey).delete()
     return redirect("notes")
 
 @login_required
@@ -264,6 +290,7 @@ def dictionary(request):
                 'form': form,
                 'input': '',
             }
+            messages.success(request, f"Word does not exist in dictionary! Try again.")
         return render(request, 'dashboard/dictionary.html', context)
     else:
         form = DashboardForm()

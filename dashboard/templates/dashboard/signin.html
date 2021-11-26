@@ -2,6 +2,8 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 <!-- Django has an inbuilt signin, signout and register packge -->
 <div class="container">
@@ -12,11 +14,28 @@
       {{form|crispy}}
     </fieldset>
     <div class="form-group">
-      <button href="" class="btn btn-outline-info" type="submit">
+      <button href="" class="btn btn-danger mb-2" type="submit">
         Sign In
       </button>
     </div>
   </form>
+  OR Sign-in using:
+  <br>
+  <!-- <button class="btn btn-danger mb-2">
+      <a href="#">Instagram</a>
+  </button> -->
+  <button class="btn btn-primary mb-2">
+      <a href="{% url 'social:begin' 'facebook' %}">Facebook</a>
+  </button>
+  <button class="btn btn-primary mb-2">
+      <a href="{% url 'social:begin' 'github' %}">Github</a>
+  </button>
+  <!-- <button class="btn btn-primary mb-2">
+      <a href="{% provider_login_url 'google' %}">Google</a>
+  </button> -->
+  <button class="btn btn-info mb-2">
+      <a href="{% url 'social:begin' 'linkedin-oauth2' %}">LinkedIn</a>
+  </button>
   <div class="border-top pt-3">
     <small class="text-muted">Need an Account?
       <a class="ml-2" href="{% url 'register' %}">Create an Account</a>

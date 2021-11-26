@@ -26,4 +26,7 @@ urlpatterns = [
     path('signin/', auth_views.LoginView.as_view(template_name = "dashboard/signin.html"), name = 'signin'),
     path('signout/', auth_views.LogoutView.as_view(template_name = "dashboard/signout.html"), name = 'signout'),
     path('profile/', dash_views.profile, name = 'profile'),
+    path('social-auth/', include('social_django.urls', namespace="social")),
+    path('accounts/', include('allauth.urls')),
+    # path('<std:username>/', dash_views.profile, name = 'user_detail'),
 ]

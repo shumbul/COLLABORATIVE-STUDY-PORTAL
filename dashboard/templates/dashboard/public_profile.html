@@ -1,0 +1,100 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags%}
+{% block content %}
+<section class="text-center">
+    <div class="container">
+      <!-- {{user.profile.bio}} -->
+      {% if not todos_done %}
+        <h2>ToDos</h2>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for todo in todos %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{todo.title}}</td>
+                    <td>
+                        <a href="{% url 'update_todo' todo.id %}">
+                            <div class="form-check">
+                              {% if todo.is_finished == True %}
+                                <input class="form-check-input" type="checkbox" value="" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" value="">
+                                {% endif %}
+                                <label class="form-check-label text-light" for="flexCheckDefault">
+                                    Mark as Completed
+                                </label>
+                            </div>
+                        </a>
+                    </td>
+
+                    <td><a href="{% url 'delete_todo' todo.id %}"><i class="fa fa-trash fa-2x"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h3>All To dos are completed!!!!</h3>
+        {% endif %}
+
+        <a href="{% url 'todo' %}" class="btn btn-danger">To Do</a>
+        <br><br>
+        {% if not hw_done %}
+        <h2>Due Homeworks</h2>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for hw in homeworks %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{hw.subject}}</td>
+                    <td>{{hw.title}}</td>
+                    <td>{{hw.description}}</td>
+                    <td>{{hw.due}}</td>
+
+                    <td>
+                        <a href="{% url 'update_homework' hw.id %}">
+                            <div class="form-check">
+                              {% if hw.is_finished == True %}
+                                <input class="form-check-input" type="checkbox" value="" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" value="">
+                                {% endif %}
+                                <label class="form-check-label text-light" for="flexCheckDefault">
+                                    Mark as Completed
+                                </label>
+                            </div>
+                        </a>
+                    </td>
+                    <td><a href="{% url 'delete_homework' hw.id %}"><i class="fa fa-trash fa-2x"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h3>All To homeworks are completed!!!!</h3>
+        {% endif %}
+
+        <a href="{% url 'homework' %}" class="btn btn-danger">Homeworks</a>
+    </div>
+</section>
+
+{% endblock content %}

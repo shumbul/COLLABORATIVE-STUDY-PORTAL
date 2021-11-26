@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,8 +39,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
+    'social_django',
     'crispy_forms',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+# SOCIALACCOUNT_PROVIDERS = {
+#    'google': {
+#       'SCOPE': [
+#          'profile',
+#          'email',
+#       ],
+#       'AUTH_PARAMS': {
+#          'access_type': 'online',
+#       }
+#    }
+# }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -101,6 +123,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Social Media Sign-in
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -129,5 +160,27 @@ CRISPY_TEMPLATE_PACK = "bootstrap"  # for setting bootstrap for "Create Notes"
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'signin'
+LOGOUT_URL = 'signout'
+LOGOUT_REDIRECT_URL = 'signin'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#  For LinkedIn
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = "78prjw7w4h3we7"        # Client ID
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = "VZ7vMq4lbIAihtWX"  # Client Secret
+
+# For Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = "629023811622098"        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = "8d88c3554fc1481edd8d59ea87678a7f"  # App Secret
+
+# For Github
+SOCIAL_AUTH_GITHUB_KEY = "de69e719d2715b323fc5"        # App ID
+SOCIAL_AUTH_GITHUB_SECRET = "c428af6e53bc5fadaa4e34051f098587a8f567d5"  # App Secret
+
+# SOCIAL_AUTH_GOOGLE_OAUTH_KEY = "147941173930-rnso0mgl6kj0spmsp3kdtp34hqjpadcq.apps.googleusercontent.com"        # App ID
+# SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = "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"  # App Secret
+
+SITE_ID = 1
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
