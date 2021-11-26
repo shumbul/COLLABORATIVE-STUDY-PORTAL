@@ -18,6 +18,9 @@ Django, HTML, CSS, JavaScript, Sqlite
 7. WikiPedia Search
 8. Basic Conversion calculator
 
+## NOTES
+
+
 # Timeline:
 | Date  | Milestone |
 | ------------- | ------------- |
@@ -28,4 +31,5 @@ Django, HTML, CSS, JavaScript, Sqlite
 | 15th to 22th  | Buiding basic app |
 | 22nd | Reviewing to mentor |
 | 22nd to 26th   | Improve/Add functionalities |
-| 26th  | Submission |
+| 26th  | Documentation |
+| 28th  | Submission |
