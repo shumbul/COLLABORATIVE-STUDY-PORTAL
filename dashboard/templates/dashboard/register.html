@@ -2,6 +2,8 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load socialaccount %}
+{% providers_media_js %}
 <div class="container">
   <form method="POST">
     {% csrf_token %}
@@ -15,6 +17,23 @@
       </button>
     </div>
   </form>
+  OR Sign-up using:
+  <br>
+  <!-- <button class="btn btn-danger mb-2">
+      <a href="#">Instagram</a>
+  </button> -->
+  <button class="btn btn-danger mb-2">
+      <a href="{% url 'social:begin' 'facebook' %}">Facebook</a>
+  </button>
+  <button class="btn btn-danger mb-2">
+      <a href="{% url 'social:begin' 'github' %}">Github</a>
+  </button>
+  <!-- <button class="btn btn-primary mb-2">
+      <a href="{% provider_login_url 'google' %}">Google</a>
+  </button> -->
+  <button class="btn btn-danger mb-2">
+      <a href="{% url 'social:begin' 'linkedin-oauth2' %}">LinkedIn</a>
+  </button>
   <div class="border-top pt-3">
     <small class="text-muted">Already have an account?
       <a class="ml-2" href="{% url 'signin' %}">Sign In</a>
