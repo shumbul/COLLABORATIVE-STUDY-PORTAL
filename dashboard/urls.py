@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.home, name = "home"),
 
     path('notes', views.notes, name = "notes"),
-    path('shareNote', views.shareNote, name = "shareNote"),
+    path('shareNote/<int:primaryKey>', views.shareNote, name = "shareNote"),
     path('delete_note/<int:primaryKey>', views.delete_note, name = "delete_note"),
     path('notes_detail/<int:primaryKey>', views.NotesDetailView.as_view(), name = "notes_detail"),
 

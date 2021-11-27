@@ -17,12 +17,14 @@
                     </div>
                 </div>
                 <br>
-                    <form action="{% url 'shareNote' %}" method = "POST">
+                    <form action="{% url 'shareNote' note.id %}" method = "POST">
                       {% csrf_token %}
                       <label for="shared_user">Select a user</label>
                       <select name="shared_user" id="shared_user">
-                        {% for user in all_users %}
-                        <option value={{user}}>{{user.username}}</option>
+                        {% for opt_user in all_users %}
+                        {% if opt_user.id != user.id %}
+                        <option value={{opt_user.id}}>{{opt_user.username}}</option>
+                        {% endif %}
                         {% endfor %}
                       </select>
                       <br><br>

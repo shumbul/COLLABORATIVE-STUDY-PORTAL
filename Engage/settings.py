@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +25,7 @@ SECRET_KEY = 'django-insecure-y4z)*ji7^uopwgq#@u(5$2$51&6+mqrk5=02p4$$eppb6yhyms
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -181,6 +180,3 @@ SOCIAL_AUTH_GITHUB_SECRET = "c428af6e53bc5fadaa4e34051f098587a8f567d5"  # App Se
 # SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = "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"  # App Secret
 
 SITE_ID = 1
-
-# Configure Django App for Heroku.
-django_heroku.settings(locals())

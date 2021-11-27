@@ -20,7 +20,6 @@ class NotesDetailView(generic.DetailView):
 
 @login_required
 def notes(request):
-    print("USER: ", request.user)
     # this function is used to make notes while studying - update, delete, mark as done are it's functionalities
     if(request.method == "POST"):
         form = NoteDescForm(request.POST)
@@ -31,11 +30,10 @@ def notes(request):
                         desc = request.POST['desc'],
                         )
             notes.save()
-        messages.success(request, f"Saved the notes from {request.user.username} successfully")
+            messages.success(request, f"Saved the notes from {request.user.username} successfully")
     else:
         form = NoteDescForm()
     notes = Notes.objects.filter(user = request.user)
-    # print(" EXPT: request, notes: ", User.objects.all(), " ---> ", notes)
     all_users = User.objects.all()
     context = {
                 'notes': notes,
@@ -50,27 +48,27 @@ def delete_note(request, primaryKey=None):
     Notes.objects.get(id = primaryKey).delete()
     return redirect("notes")
 
-def shareNote(request):
+def shareNote(request, primaryKey=None):
     # HOW to share note to another user's session?
-    # user=User.objects.get(username=username)
-    # shared_user = User.objects.get(id=userId)
-    # request.POST = request.POST.copy()
-    shared_user = request.POST['shared_user']
-    request.POST._mutable = True
-    request.POST.pop('shared_user')
+    obj = request.POST.copy()
+    shared_user = User.objects.get(pk = obj['shared_user'])
+    note = Notes.objects.get(id = primaryKey)
+    obj['title'] = note.title
+    obj['desc'] = note.desc
 
-    form = NoteDescForm(request.POST)
-    print("FORM: ", form)
+    form = NoteDescForm(obj)
     if(form.is_valid()):
-        print(" #########################EXPT: user: ", shared_user)
+        print(" Sending to user: ", shared_user)
         notes = Notes(
-                    title = request.POST['title'],
+                    title = obj['title'],
                     user = shared_user,
-                    desc = request.POST['desc'],
+                    desc = obj['desc'],
                     )
         notes.save()
         messages.success(request, f"Saved the notes to {shared_user} successfully")
-    # Notes.objects.get(id = primaryKey).delete()
+    else:
+        messages.success(request, f"Could not save the notes to {shared_user}")
+        print("FAILED SHARING")
     return redirect("notes")
 
 @login_required
@@ -227,14 +225,6 @@ def books(request):
         # print("ans12213 = ", ans, "\n\n\n\n^^^^^^\n")
         for i in range(10):
             # res_dict = {}
-            # if(ans['items'][i]['volumeInfo']):
-            #     print("heyyyyhdadhdjas")
-            #     # res_dict['thumbnail']= ans['items'][i]['volumeInfo']['imageLinks'].get('thumbnail')
-            # else:
-            #     ans['items'][i]['volumeInfo']['imageLinks']['thumbnail'] = ''
-            # if(ans['items'][i]['volumeInfo'].get('imageLinks') == None):
-            #     print('Halo')
-            #     continue
             # print(ans['items'][i]['volumeInfo'].get('imageLinks'))
             res_dict = {
             'title' : ans['items'][i]['volumeInfo']['title'],
