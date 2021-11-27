@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django import contrib
 from django.contrib import messages # for posting messages, fixed forbidden csrf token issue
 from django.views import generic
-import wikipedia
+import wikipedia #used in WikiPedia
 import random
 from django.contrib.auth.decorators import login_required
 from youtubesearchpython import VideosSearch # for playing Youtube videos
