@@ -2,6 +2,9 @@
 
 08th Nov - 28th Nov
 
+
+VIDEO DEMO LINK - [here](https://youtu.be/7a9-Qk-Pc4I)
+
 ## Idea: 
 Making a website for studying & notes sharing.
 
@@ -32,4 +35,5 @@ Django, HTML, CSS, JavaScript, Sqlite
 | 22nd | Reviewing to mentor |
 | 22nd to 26th   | Improve/Add functionalities |
 | 26th  | Documentation |
+| 27th  | Deployment |
 | 28th  | Submission |
