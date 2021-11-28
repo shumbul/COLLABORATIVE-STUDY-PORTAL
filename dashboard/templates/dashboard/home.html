@@ -10,7 +10,7 @@
     <div class="col-md-3">
       <a href="{% url 'notes' %}">
         <div class="card">
-          <img class="card-img-top" src="https://cdn.vox-cdn.com/thumbor/gplppy3_6RDQ3Od2sfsNHn5YVjY=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/18277139/GettyImages_577660404.jpg" alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/notes.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Notes
@@ -24,7 +24,7 @@
     <div class="col-md-3">
       <a href="{% url 'homework' %}">
         <div class="card">
-          <img class="card-img-top" src='https://pbs.twimg.com/media/Ef58v9DWsAAGQ84.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/homework.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Homework
@@ -37,7 +37,7 @@
     <div class="col-md-3">
       <a href="{% url 'youtube' %}">
         <div class="card">
-          <img class="card-img-top" src='https://cdn.vox-cdn.com/thumbor/9C0z7GTVmjtoOd9pJIg35qyGkqw=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/66243228/wjoel_1777_180403_youtube_003.0.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/youtube.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Youtube
@@ -50,7 +50,7 @@
     <div class="col-md-3">
       <a href="{% url 'todo' %}">
         <div class="card">
-          <img class="card-img-top" src='/static/images/todo.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/todo.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               To Do
@@ -66,7 +66,7 @@
     <div class="col-md-3 ">
       <a href="{% url 'books' %}">
         <div class="card mt-20">
-          <img class="card-img-top" src='/static/images/books.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/books.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Books
@@ -82,7 +82,7 @@
     <div class="col-md-3">
       <a href="{% url 'dictionary' %}">
         <div class="card">
-          <img class="card-img-top" src='/static/images/dictionary.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/dictionary.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Dictionary
@@ -96,7 +96,7 @@
     <div class="col-md-3">
       <a href="{% url 'wiki' %}">
         <div class="card">
-          <img class="card-img-top" src='/static/images/wiki.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/wiki.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               WikiPedia
@@ -111,7 +111,7 @@
     <div class="col-md-3">
       <a href="{% url 'conversion' %}">
         <div class="card">
-          <img class="card-img-top" src='/static/images/conversion.jpg' alt="Notes image">
+          <img class="card-img-top" src="{% static 'images/conversion.jpg' %}" alt="Notes image">
           <div class="card-body">
             <h5 class="card-title ">
               Conversion

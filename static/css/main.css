@@ -15,9 +15,9 @@ footer {
     font-family: Rubik, sans-serif, serif, 'Times New Roman', Times, serif;
 }
 
-.example::-webkit-scrollbar {
+/* .example::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .navbar {
     background-color: rgb(0, 0, 0) !important;
@@ -192,7 +192,7 @@ footer .column a+a {
     margin-bottom: 20px;
 }
 
-/* 
+/*
 .content-section a:hover {
     background: red;
 } */
