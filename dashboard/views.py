@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django import contrib
 from django.contrib import messages # for posting messages, fixed forbidden csrf token issue
 from django.views import generic
-import wikipedia #used in WikiPedia
+import wikipedia #used in Wikipedia
 import random
 from django.contrib.auth.decorators import login_required
 from youtubesearchpython import VideosSearch # for playing Youtube videos
@@ -222,10 +222,8 @@ def books(request):
         r = requests.get(url)
         ans = r.json()
         res = []
-        # print("ans12213 = ", ans, "\n\n\n\n^^^^^^\n")
         for i in range(10):
             # res_dict = {}
-            # print(ans['items'][i]['volumeInfo'].get('imageLinks'))
             res_dict = {
             'title' : ans['items'][i]['volumeInfo']['title'],
             'subtitle' : ans['items'][i]['volumeInfo'].get('subtitle'),
