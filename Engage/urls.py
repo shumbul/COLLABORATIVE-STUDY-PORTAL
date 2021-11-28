@@ -18,6 +18,8 @@ from django.urls import path
 from django.urls.conf import include
 from dashboard import views as dash_views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +31,4 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace="social")),
     path('accounts/', include('allauth.urls')),
     # path('<std:username>/', dash_views.profile, name = 'user_detail'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
